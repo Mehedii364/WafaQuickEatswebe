@@ -1,0 +1,42 @@
+# =====================================================================
+# Wafa QuickEats ⚡ - Production Apache Configuration (.htaccess)
+# Brand: Wafa Zone by Mehedi364
+# Compatible with: InfinityFree, cPanel, Apache 2.4+
+# =====================================================================
+
+# 1. Enable URL Rewriting
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Enforce HTTPS (if SSL is active on hosting)
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # Block access to hidden files and directories (like .git, .env)
+    RewriteRule "(^|/)\.(?!well-known)" - [F]
+
+    # Block direct access to config and sql schema files
+    RewriteRule ^config/ - [F,L]
+    RewriteRule ^database/schema\.sql$ - [F,L]
+</IfModule>
+
+# 2. Disable Directory Browsing
+Options -Indexes
+
+# 3. Security Headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# 4. UTF-8 Character Encoding
+AddDefaultCharset UTF-8
+
+# 5. File Upload Size Limits
+php_value upload_max_filesize 20M
+php_value post_max_size 25M
+php_value max_execution_time 60
+php_value memory_limit 128M

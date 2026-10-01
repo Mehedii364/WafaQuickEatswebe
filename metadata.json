@@ -1,0 +1,10 @@
+{
+  "name": "Wafa QuickEats ⚡",
+  "description": "Fast Food. Live Tracking. Smart Delivery. Production-ready food delivery platform by Wafa Zone (Mehedi364).",
+  "requestFramePermissions": [
+    "geolocation"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
